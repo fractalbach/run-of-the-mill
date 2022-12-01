@@ -131,9 +131,8 @@ func update_debugger():
 	$Debugger/Label.text = \
 		"FPS: %3d \n" % Engine.get_frames_per_second()\
 		+ "Distance: %d \n" % ($Player.position.x / 100)\
-		+ "Hitpoints: %d \n" % $Player.hitpoints\
 		+ "Difficulty: %d \n" % difficulty\
-		+ "left_limit: %d \n" % left_limit\
+		+ "Hitpoints: %d \n" % $Player.hitpoints
 
 
 func advance_left_limit(delta):
