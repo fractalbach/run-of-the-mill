@@ -1,7 +1,31 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/TitleScreen/ButtonPlayGame.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Game/TitleScreen.tres" type="Theme" id=2]
+[ext_resource path="res://assets/bird/bird1.png" type="Texture" id=3]
+[ext_resource path="res://assets/bird/bird2.png" type="Texture" id=4]
+[ext_resource path="res://assets/bird/bird3.png" type="Texture" id=5]
+[ext_resource path="res://assets/player_images/walk2.png" type="Texture" id=6]
+[ext_resource path="res://assets/mill/windmill.png" type="Texture" id=7]
+[ext_resource path="res://assets/player_images/walk1.png" type="Texture" id=8]
+[ext_resource path="res://assets/player_images/walk4.png" type="Texture" id=9]
+[ext_resource path="res://assets/player_images/walk3.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="TitleScreen" type="MarginContainer"]
 anchor_right = 1.0
@@ -58,3 +82,22 @@ margin_top = 200.0
 margin_right = 333.0
 margin_bottom = 244.0
 text = "by Chris Achenbach"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 197, 313 )
+scale = Vector2( 0.240769, 0.240769 )
+frames = SubResource( 1 )
+animation = "walk"
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 524, 89.9999 )
+scale = Vector2( 0.240769, 0.240769 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 866, 288 )
+scale = Vector2( 0.384766, 0.384766 )
+texture = ExtResource( 7 )
