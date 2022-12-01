@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/Sound/Sound.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/thresh.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/jump.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/blib.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/mill.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/scythe.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/crow.mp3" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/snip.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/threshed_wheat.wav" type="AudioStream" id=9]
+
+[node name="Sound" type="AudioStreamPlayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+scythe_swing = ExtResource( 6 )
+thresher_swing = ExtResource( 2 )
+bird_hits_player = ExtResource( 7 )
+player_jumps = ExtResource( 3 )
+pass_the_mill = ExtResource( 5 )
+pickup_seed = ExtResource( 4 )
+successful_scythe = ExtResource( 8 )
+successful_thresh = ExtResource( 9 )

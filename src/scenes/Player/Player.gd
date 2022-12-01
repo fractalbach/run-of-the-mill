@@ -43,6 +43,7 @@ func _process(delta):
 		JUMP_READY:
 			if Input.is_action_pressed("game_jump"):
 				jump_state = JUMP_UPWARD
+				Sound.play_sound(Sound.player_jumps)
 				
 		JUMP_UPWARD:
 			if Input.is_action_pressed("game_jump") and jump_timer < JUMP_TIMER_MAX:
@@ -53,21 +54,20 @@ func _process(delta):
 				jump_timer = 0
 			
 		JUMP_FALLING:
-#			if Input.is_action_pressed("game_down"):
-#				position.y += SPEED_FALL * delta * 60
-#			if position.y > min_position_y:
-#				position.y = min_position_y
-#				jump_state = JUMP_READY
 			if is_on_floor():
 				jump_state = JUMP_READY
+				# Sound.play_sound(Sound.player_lands)
 
 	if not attacking:
 		if Input.is_action_pressed("game_scythe"):
 			$AnimatedSprite.play("scythe")
 			attacking = true
+			Sound.play_sound(Sound.scythe_swing)
+			
 		elif Input.is_action_pressed("game_thresh"):
 			$AnimatedSprite.play("thresh")
 			attacking = true
+			Sound.play_sound(Sound.thresher_swing)
 
 	# ducking = false
 

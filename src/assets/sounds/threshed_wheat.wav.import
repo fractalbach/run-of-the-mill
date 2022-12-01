@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/threshed_wheat.wav-807fae56391096a8dad0d085ab76affd.sample"
+
+[deps]
+
+source_file="res://assets/sounds/threshed_wheat.wav"
+dest_files=[ "res://.import/threshed_wheat.wav-807fae56391096a8dad0d085ab76affd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

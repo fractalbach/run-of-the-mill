@@ -53,15 +53,6 @@ var left_limit_speed = {
 	3: 10.0,
 }
 
-#func _ready():
-#	# just for testing
-#	var w = WheatStalk.instance()
-#	w.position.x = $Player.position.x + 2000
-#	w.position.y = -rand_range(20, 500)
-#	w.set_height(-w.position.y)
-#	add_child(w)
-#	pass
-
 
 func _process(delta: float) -> void:
 	update_debugger()
@@ -71,9 +62,9 @@ func _process(delta: float) -> void:
 	wheat_spawning_procedure(delta)
 	sync_floor_position_with_player()
 	if $Player.is_on_wall() and $Player.position.x - 50 < left_limit:
-		death_sequence("You got stuck between a rock and a hard place")
+		death_sequence("You got stuck between a rock and a hard place.")
 	if $Player.hitpoints <= 0:
-		death_sequence()
+		death_sequence("It was a murder of crows.")
 
 
 func _physics_process(_delta: float) -> void:
@@ -89,6 +80,7 @@ func handle_player_collisions():
 		if area.is_in_group("bird") and $Player.invincible_cooldown == 0:
 			$Player.invincible_cooldown = $Player.INVINCIBLE_COOLDOWN_MAX
 			$Player.hitpoints -= 1
+			Sound.play_sound(Sound.bird_hits_player)
 			
 		elif area.is_in_group("wheat_stalk") and $Player/AnimatedSprite.animation == "scythe":
 			var w = WheatChopped.instance()
@@ -97,6 +89,7 @@ func handle_player_collisions():
 			w.linear_velocity = Vector2(1500, -1500)
 			area.get_parent().queue_free()
 			wheat_scythed += 1
+			Sound.play_sound(Sound.successful_scythe)
 			
 		elif area.is_in_group("wheat_chopped") and $Player/AnimatedSprite.animation == "thresh":
 			var w = WheatSeed.instance()
@@ -105,15 +98,19 @@ func handle_player_collisions():
 			w.linear_velocity = Vector2(1500, -1500)
 			area.get_parent().queue_free()
 			wheat_threshed += 1
+			Sound.play_sound(Sound.successful_thresh)
 			
 		elif area.is_in_group("wheat_seed") and area.get_node("../SpawnTimer").is_stopped():
-			print("seed collected!")
 			area.get_parent().queue_free()
 			seeds_collected += 1
+			Sound.play_sound(Sound.pickup_seed)
 		
 		elif area.is_in_group("windmill"):
 			flour_milled = seeds_collected
 			$Player.hitpoints = 5
+			if $WindmillSoundTimer.is_stopped():
+				Sound.play_sound(Sound.pass_the_mill)
+				$WindmillSoundTimer.start()
 
 
 func handle_objects_past_left_limit():
