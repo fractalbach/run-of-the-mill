@@ -1,0 +1,281 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Game/Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://assets/tiles/hay_background.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Game/TitleScreen.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/Game/RetryButton.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Game/Game.gd" type="Script" id=6]
+[ext_resource path="res://assets/tiles/wheat_block2.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/mountains.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/big_sky.png" type="Texture" id=10]
+[ext_resource path="res://scenes/WheatSeed/WheatSeed.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/WheatChopped/WheatChopped.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Wall/Wall.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/mill/windmill.png" type="Texture" id=14]
+[ext_resource path="res://scenes/Game/InGame.tres" type="Theme" id=15]
+[ext_resource path="res://scenes/WheatStalk/WheatStalk.tscn" type="PackedScene" id=16]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6000, 102 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 1000 )
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="SkyTiles2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, -296 )
+motion_scale = Vector2( 0.2, 0.2 )
+motion_mirroring = Vector2( 2048, 1024 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SkyTiles2"]
+position = Vector2( 920, 40 )
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 20480, 1024 )
+
+[node name="Mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, -250 )
+motion_scale = Vector2( 0.3, 0.3 )
+motion_mirroring = Vector2( 15360, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Mountains"]
+position = Vector2( 920, 40 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 15360, 512 )
+
+[node name="WheatfieldLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 200, 800 )
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 4096, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/WheatfieldLayer"]
+position = Vector2( 1073, -630 )
+texture = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.0980392 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="GroundTiles" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, -32 )
+motion_mirroring = Vector2( 8192, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/GroundTiles"]
+position = Vector2( -256, -8 )
+texture = ExtResource( 7 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 322, 8192, 512 )
+
+[node name="Debugger" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Debugger"]
+margin_right = 168.0
+margin_bottom = 44.0
+theme = ExtResource( 4 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/line_spacing = -14
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "Debugger"
+
+[node name="left_limit_line" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 1000, 0, -1000 )
+default_color = Color( 0.756863, 0.137255, 0.164706, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.490196 )
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+margin_left = 262.0
+margin_top = 125.0
+margin_right = 762.0
+margin_bottom = 474.0
+
+[node name="OhNoLabel" type="RichTextLabel" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+margin_right = 500.0
+margin_bottom = 45.0
+focus_mode = 2
+bbcode_enabled = true
+bbcode_text = "[b][center]Oh No! You have Died![/center][/b]"
+text = "Oh No! You have Died!"
+fit_content_height = true
+selection_enabled = true
+
+[node name="FinalScoreLabel" type="RichTextLabel" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+margin_top = 49.0
+margin_right = 500.0
+margin_bottom = 245.0
+rect_min_size = Vector2( 500, 0 )
+focus_mode = 2
+bbcode_enabled = true
+bbcode_text = "[table=2]
+[cell]distance [/cell] [cell]00000000[/cell]
+[cell]wheat[/cell] [cell]0[/cell]
+[cell]seeds[/cell] [cell]0[/cell]
+[cell]flour[/cell] [cell]0[/cell]
+[/table]"
+text = "distance 00000000wheat0seeds0flour0"
+fit_content_height = true
+selection_enabled = true
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+margin_top = 249.0
+margin_right = 500.0
+margin_bottom = 349.0
+rect_min_size = Vector2( 500, 100 )
+text = "Try Again"
+script = ExtResource( 5 )
+
+[node name="Floor" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2( 0, 104 )
+shape = SubResource( 1 )
+
+[node name="Windmill" type="Sprite" parent="."]
+position = Vector2( 4440, -384 )
+texture = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="Windmill" groups=["windmill"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Windmill/Area2D"]
+shape = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 24, -264 )
+scale = Vector2( 0.939, 1 )
+z_index = 1
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 2.2, 2.2 )
+limit_left = -100
+limit_bottom = 64
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_top = 0.56
+drag_margin_bottom = 0.0
+editor_draw_drag_margin = true
+script = ExtResource( 2 )
+
+[node name="WheatChopped" parent="." instance=ExtResource( 12 )]
+position = Vector2( 2744, -112 )
+
+[node name="WheatSeed" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3680, -128 )
+
+[node name="WheatStalk" parent="." instance=ExtResource( 16 )]
+position = Vector2( 1792, -200 )
+
+[node name="Wall" parent="." instance=ExtResource( 13 )]
+position = Vector2( 5000, -100 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 15 )
+
+[node name="WarningSign" type="Label" parent="Control"]
+margin_left = 5016.0
+margin_top = -408.0
+margin_right = 5714.0
+margin_bottom = -321.0
+text = "Watch Out For Birds!"
+valign = 1
+
+[node name="Info_Controls" type="Label" parent="Control"]
+margin_left = 520.0
+margin_top = -568.0
+margin_right = 1344.0
+margin_bottom = -72.0
+text = "Left:    [A]     
+Right: [D]
+Jump: [W] or [Space]"
+
+[node name="Info_Controls2" type="Label" parent="Control"]
+margin_left = 1336.0
+margin_top = -496.0
+margin_right = 2251.0
+margin_bottom = -49.0
+text = "Scythe: [ J ] or (LeftClick)
+
+
+
+Harvest!"
+align = 1
+
+[node name="Info_Controls3" type="Label" parent="Control"]
+margin_left = 2256.0
+margin_top = -712.0
+margin_right = 3236.0
+margin_bottom = -208.0
+text = "Thresher: [ K ] or (RightClick)
+
+Threshing helps to
+seperate the wheat
+from the chaff!"
+align = 1
+
+[node name="Info_Controls4" type="Label" parent="Control"]
+margin_left = 3408.0
+margin_top = -328.0
+margin_right = 3981.0
+margin_bottom = -143.0
+text = "Collect the seeds!"
+
+[node name="Info_Controls5" type="Label" parent="Control"]
+margin_left = 4024.0
+margin_top = -384.0
+margin_right = 4900.0
+margin_bottom = -117.0
+text = "Passing a Mill 
+will convert your 
+Seeds into Flour!"
+align = 1

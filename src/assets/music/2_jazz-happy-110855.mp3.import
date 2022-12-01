@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/2_jazz-happy-110855.mp3-dad665d82cd16fb07d2324bd0413e604.mp3str"
+
+[deps]
+
+source_file="res://assets/music/2_jazz-happy-110855.mp3"
+dest_files=[ "res://.import/2_jazz-happy-110855.mp3-dad665d82cd16fb07d2324bd0413e604.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

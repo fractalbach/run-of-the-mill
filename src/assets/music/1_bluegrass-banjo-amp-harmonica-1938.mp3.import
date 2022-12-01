@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/1_bluegrass-banjo-amp-harmonica-1938.mp3-95decb9a5beff887f5594b7c66f2f53f.mp3str"
+
+[deps]
+
+source_file="res://assets/music/1_bluegrass-banjo-amp-harmonica-1938.mp3"
+dest_files=[ "res://.import/1_bluegrass-banjo-amp-harmonica-1938.mp3-95decb9a5beff887f5594b7c66f2f53f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

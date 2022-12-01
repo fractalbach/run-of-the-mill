@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/4_banjo-romp-109570.mp3-a3d605173132b197773a5374c6a4fcb0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/4_banjo-romp-109570.mp3"
+dest_files=[ "res://.import/4_banjo-romp-109570.mp3-a3d605173132b197773a5374c6a4fcb0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
